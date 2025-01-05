@@ -1,0 +1,29 @@
+@model JobOffer
+
+@{
+    ViewData["Title"] = "Détails de l'offre";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <strong>Titre:</strong> @Model.Title
+</div>
+<div>
+    <strong>Description:</strong> @Model.Description
+</div>
+<div>
+    <strong>Entreprise:</strong> @Model.Company
+</div>
+<div>
+    <strong>Lieu:</strong> @Model.Location
+</div>
+<div>
+    <strong>Fourchette de salaire:</strong> @Model.SalaryRange
+</div>
+<div>
+    <strong>Date d'expiration:</strong> @Model.ExpiresAt
+</div>
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-primary">Retour</a>
+</div>

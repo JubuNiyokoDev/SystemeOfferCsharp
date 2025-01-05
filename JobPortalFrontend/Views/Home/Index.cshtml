@@ -1,0 +1,31 @@
+﻿@model List<JobOffer>
+
+    @{
+    ViewData["Title"] = "Offres d'emploi";
+    }
+
+    <h2>@ViewData["Title"]</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Entreprise</th>
+                <th>Lieu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var offer in Model)
+        {
+            <tr>
+                <td>@offer.Title</td>
+                <td>@offer.Company</td>
+                <td>@offer.Location</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = offer.Id })" class="btn btn-info">Détails</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
