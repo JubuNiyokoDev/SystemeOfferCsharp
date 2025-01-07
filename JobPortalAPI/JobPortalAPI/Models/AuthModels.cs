@@ -12,7 +12,12 @@ public class RegisterModel
     [Required]
     [MinLength(6, ErrorMessage = "Le mot de passe doit contenir au moins 6 caractères.")]
     public string Password { get; set; }
+
+    [Required]
+    [Phone(ErrorMessage = "Le numéro de téléphone est invalide.")]
+    public string PhoneNumber { get; set; }
 }
+
 
 public class LoginModel
 {

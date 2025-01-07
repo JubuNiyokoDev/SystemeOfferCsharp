@@ -16,19 +16,27 @@ public class JobController : Controller
     // Afficher toutes les offres d'emploi
     public async Task<IActionResult> Index()
     {
-        var response = await _httpClient.GetAsync("http://localhost:5000/api/joboffers");
-        response.EnsureSuccessStatusCode();
+        var response = await _httpClient.GetAsync("http://localhost:5269/api/joboffers");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            // Gérer les erreurs de l'API
+            ViewData["Error"] = "Impossible de charger les offres d'emploi.";
+            return View(new List<JobOffer>()); // Passez une liste vide pour éviter l'erreur
+        }
 
         var content = await response.Content.ReadAsStringAsync();
         var jobOffers = JsonConvert.DeserializeObject<List<JobOffer>>(content);
 
-        return View(jobOffers);
+        return View(jobOffers ?? new List<JobOffer>()); // Assurez-vous de passer une liste vide si null
     }
+
+
 
     // Afficher le détail d'une offre d'emploi
     public async Task<IActionResult> Details(int id)
     {
-        var response = await _httpClient.GetAsync($"http://localhost:5000/api/joboffers/{id}");
+        var response = await _httpClient.GetAsync($"http://localhost:5269/api/joboffers/{id}");
         response.EnsureSuccessStatusCode();
 
         var content = await response.Content.ReadAsStringAsync();
@@ -52,7 +60,7 @@ public class JobController : Controller
             var json = JsonConvert.SerializeObject(jobOffer);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("http://localhost:5000/api/joboffers", content);
+            var response = await _httpClient.PostAsync("http://localhost:5269/api/joboffers", content);
 
             if (response.IsSuccessStatusCode)
             {

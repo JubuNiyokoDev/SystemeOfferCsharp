@@ -172,3 +172,4 @@ D:\C#\SystemeOfferCsharp\JobPortalAPI\JobPortalAPI\obj\Debug\net8.0\JobPortalAPI
 D:\C#\SystemeOfferCsharp\JobPortalAPI\JobPortalAPI\obj\Debug\net8.0\JobPortalAPI.genruntimeconfig.cache
 D:\C#\SystemeOfferCsharp\JobPortalAPI\JobPortalAPI\obj\Debug\net8.0\ref\JobPortalAPI.dll
 D:\C#\SystemeOfferCsharp\JobPortalAPI\JobPortalAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\C#\SystemeOfferCsharp\JobPortalAPI\JobPortalAPI\bin\Debug\net8.0\Newtonsoft.Json.dll

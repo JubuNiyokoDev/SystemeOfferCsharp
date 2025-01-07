@@ -6,6 +6,12 @@
 
     <h2>@ViewData["Title"]</h2>
 
+    @if (Model == null || !Model.Any())
+{
+    <p>Aucune offre d'emploi disponible pour le moment.</p>
+}
+else
+{
     <table class="table">
         <thead>
             <tr>
@@ -17,7 +23,7 @@
         </thead>
         <tbody>
             @foreach (var offer in Model)
-        {
+            {
             <tr>
                 <td>@offer.Title</td>
                 <td>@offer.Company</td>
@@ -26,6 +32,7 @@
                     <a href="@Url.Action("Details", new { id = offer.Id })" class="btn btn-info">Détails</a>
                 </td>
             </tr>
-        }
+            }
         </tbody>
     </table>
+}

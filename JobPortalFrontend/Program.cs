@@ -1,29 +1,45 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Net.Http;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Ajouter HttpClient
+builder.Services.AddHttpClient();
+
+
+// Ajouter les services MVC avec vues
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication("CookieAuth")
+    .AddCookie("CookieAuth", options =>
+    {
+        options.LoginPath = "/Account/Login"; // Redirige les utilisateurs non authentifiés
+        options.AccessDeniedPath = "/Account/AccessDenied"; // En cas d'accès interdit
+    });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configurer le pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // Activer HSTS pour la sécurité
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(); // Activer les fichiers statiques (CSS, JS, etc.)
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
 
+// Configurer les routes par défaut
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
